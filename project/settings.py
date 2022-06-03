@@ -20,7 +20,7 @@ env = environ.Env(
     DEBUG=(bool, False),
     ENVIRONMENT=(str, "PRODUCTION"),
     ALLOW_ALL_ORIGINS=(bool, False),
-    ALLOWED_HOSTS=(list, ['*' ,'https://cookiesstand.herokuapp.com/','cookiesstand.herokuapp.com/','cookiesstand.herokuapp.com','127.0.0.1']),
+    ALLOWED_HOSTS=(list, []),
     ALLOWED_ORIGINS=(list, []),
     DATABASE_ENGINE=(str, "django.db.backends.sqlite3"),
     DATABASE_NAME=(str, BASE_DIR / "db.sqlite3"),
@@ -28,7 +28,10 @@ env = environ.Env(
     DATABASE_PASSWORD=(str, ""),
     DATABASE_HOST=(str, ""),
     DATABASE_PORT=(int, 5432),
+    CSRF_TRUSTED_ORIGINS =(list, []),
+
 )
+
 
 environ.Env.read_env()
 
@@ -36,6 +39,7 @@ ENVIRONMENT = env.str("ENVIRONMENT")
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+
 
 SECRET_KEY = env.str("SECRET_KEY")
 
@@ -47,6 +51,7 @@ ALLOWED_HOSTS = tuple(env.list("ALLOWED_HOSTS"))
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # Application definition
+CSRF_TRUSTED_ORIGINS =tuple(env.list("CSRF_TRUSTED_ORIGINS"))
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -169,4 +174,4 @@ REST_FRAMEWORK = {
 CORS_ORIGIN_WHITELIST = tuple(env.list("ALLOWED_ORIGINS"))
 CORS_ALLOW_ALL_ORIGINS = env.bool("ALLOW_ALL_ORIGINS")
 
-CSRF_TRUSTED_ORIGINS =['https://cookiesstand.herokuapp.com/']
+
